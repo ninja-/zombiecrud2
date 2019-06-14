@@ -35,7 +35,7 @@ export class NbpService {
             return cached;
         }
 
-        const data = this.fetchExchangeRates();
+        const data = await this.fetchExchangeRates();
         await this.cacheService.updateCacheValidTo('nbp', data, this.getMidnight(), true);
         return data;
     }
