@@ -1,7 +1,6 @@
 import { Service } from 'typedi';
 import { OrmRepository } from 'typeorm-typedi-extensions';
 
-// import { EventDispatcher, EventDispatcherInterface } from '../../decorators/EventDispatcher';
 import { Logger, LoggerInterface } from '../../decorators/Logger';
 import {Cache} from '../models/Cache';
 import { CacheRepository } from '../repositories/CacheRepository';
@@ -12,7 +11,6 @@ export class CacheService {
 
     constructor(
         @OrmRepository() private cacheRepository: CacheRepository,
-        // @EventDispatcher() private eventDispatcher: EventDispatcherInterface,
         @Logger(__filename) private log: LoggerInterface
     ) { }
 

@@ -1,9 +1,5 @@
 import { Service } from 'typedi';
-// import { OrmRepository } from 'typeorm-typedi-extensions';
-
-// import { EventDispatcher, EventDispatcherInterface } from '../../decorators/EventDispatcher';
 import { Logger, LoggerInterface } from '../../decorators/Logger';
-// import { PetRepository } from '../repositories/PetRepository';
 import { ExchangeRates } from '../models/ExchangeRates';
 import {CacheService} from './CacheService';
 
@@ -15,8 +11,6 @@ const NBP_EXCHANGERATE_URL = 'http://api.nbp.pl/api/exchangerates/tables/C/today
 export class NbpService {
     constructor(
         private cacheService: CacheService,
-        // @OrmRepository() private cacheRepository: CacheRepo/sitory,
-        // @EventDispatcher() private eventDispatcher: EventDispatcherInterface,
         @Logger(__filename) private log: LoggerInterface
     ) { }
 

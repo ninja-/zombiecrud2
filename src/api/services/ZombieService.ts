@@ -15,7 +15,6 @@ export class ZombieService {
         @OrmRepository() private zombieRepository: ZombieRepository,
         private zombieMarketService: ZombieMarketService,
         private nbpService: NbpService,
-        // @EventDispatcher() private eventDispatcher: EventDispatcherInterface,
         @Logger(__filename) private log: LoggerInterface
     ) { }
 

@@ -1,9 +1,5 @@
 import { Service } from 'typedi';
-// import { OrmRepository } from 'typeorm-typedi-extensions';
-
-// import { EventDispatcher, EventDispatcherInterface } from '../../decorators/EventDispatcher';
 import { Logger, LoggerInterface } from '../../decorators/Logger';
-// import { PetRepository } from '../repositories/PetRepository';
 import {CacheService} from './CacheService';
 
 import fetch from 'node-fetch';
@@ -15,8 +11,6 @@ const ZOMBIEMARKET_URL = 'https://zombie-items-api.herokuapp.com/api/items';
 export class ZombieMarketService {
     constructor(
         private cacheService: CacheService,
-        // @OrmRepository() private cacheRepository: CacheRepo/sitory,
-        // @EventDispatcher() private eventDispatcher: EventDispatcherInterface,
         @Logger(__filename) private log: LoggerInterface
     ) { }
 
