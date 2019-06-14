@@ -30,7 +30,7 @@ export class CacheService {
     }
 
     public async updateCacheValidTo(key: string, data: any, validTo: Date, inMemory?: boolean): Promise<void> {
-        return await this.updateCache(key, data, validTo.getTime() - new Date().getTime(), inMemory);
+        return await this.updateCache(key, data, (validTo.getTime() - new Date().getTime()) / 1000, inMemory);
     }
 
     public async getCache<T>(id: string, inMemory?: boolean): Promise<T> {
