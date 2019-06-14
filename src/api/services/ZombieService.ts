@@ -2,11 +2,9 @@ import { Service } from 'typedi';
 import { OrmRepository } from 'typeorm-typedi-extensions';
 import uuid from 'uuid';
 
-// import { EventDispatcher, EventDispatcherInterface } from '../../decorators/EventDispatcher';
 import { Logger, LoggerInterface } from '../../decorators/Logger';
 import { Zombie } from '../models/Zombie';
 import { ZombieRepository } from '../repositories/ZombieRepository';
-// import { events } from '../subscribers/events';
 
 @Service()
 export class ZombieService {
@@ -18,6 +16,10 @@ export class ZombieService {
     ) { }
 
     public cleanupZombie<T extends any>(arg: T): T {
+        if (!arg) {
+            return arg;
+        }
+
         // Remove itemsJSON manually
         if (Array.isArray(arg)) {
             arg.forEach(arg => delete arg.itemsJSON);
@@ -42,14 +44,13 @@ export class ZombieService {
         this.log.info('Create a new zombie => ', zombie.toString());
         zombie.id = uuid.v1();
         const newZombie = await this.zombieRepository.save(zombie);
-        // this.eventDispatcher.dispatch(events.zombie.created, newZombie);
-        return newZombie;
+        return this.cleanupZombie(newZombie);
     }
 
     public update(id: string, zombie: Zombie): Promise<Zombie> {
         this.log.info('Update a zombie');
         zombie.id = id;
-        return this.zombieRepository.save(zombie);
+        return this.cleanupZombie(this.zombieRepository.save(zombie));
     }
 
     public async delete(id: string): Promise<void> {
@@ -57,5 +58,4 @@ export class ZombieService {
         await this.zombieRepository.delete(id);
         return;
     }
-
 }

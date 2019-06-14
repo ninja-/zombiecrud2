@@ -20,24 +20,25 @@ export class ZombieController {
 
     @Get('/:id')
     @OnUndefined(ZombieNotFoundError)
-    public one(@Param('id') id: string): Promise<Zombie | undefined> {
+    public async one(@Param('id') id: string): Promise<Zombie | undefined> {
         return this.zombieService.findOne(id);
     }
 
     @Post()
-    public create(@Body() zombie: Zombie): Promise<Zombie> {
+    public async create(@Body() zombie: Zombie): Promise<Zombie> {
         console.log(zombie);
-        return this.zombieService.create(zombie);
+        return await this.zombieService.create(zombie);
     }
 
     @Put('/:id')
-    public update(@Param('id') id: string, @Body() zombie: Zombie): Promise<Zombie> {
-        return this.zombieService.update(id, zombie);
+    public async update(@Param('id') id: string, @Body() zombie: Zombie): Promise<Zombie> {
+        return await this.zombieService.update(id, zombie);
     }
 
     @Delete('/:id')
-    public delete(@Param('id') id: string): Promise<void> {
-        return this.zombieService.delete(id);
+    public async delete(@Param('id') id: string): Promise<any> {
+        await this.zombieService.delete(id);
+        return {message: "Zombie deleted"};
     }
 
 }
