@@ -5,7 +5,7 @@ import {CacheService} from './CacheService';
 
 import fetch from 'node-fetch';
 
-const NBP_EXCHANGERATE_URL = 'http://api.nbp.pl/api/exchangerates/tables/C/today/';
+const NBP_EXCHANGERATE_URL = 'http://api.nbp.pl/api/exchangerates/tables/C/';
 
 @Service()
 export class NbpService {

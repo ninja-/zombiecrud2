@@ -70,8 +70,8 @@ export class Zombie {
                 this.inventoryValuePLN += item.price;
             }
         }
-        this.inventoryValueEUR = this.inventoryValuePLN * rates.eur;
-        this.inventoryValueUSD = this.inventoryValuePLN * rates.usd;
+        this.inventoryValueEUR = this.inventoryValuePLN / rates.eur;
+        this.inventoryValueUSD = this.inventoryValuePLN / rates.usd;
     }
 
     public toString(): string {
