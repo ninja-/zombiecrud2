@@ -1,3 +1,4 @@
+/* tslint:disable */
 import {MigrationInterface, QueryRunner} from "typeorm";
 
 export class zombie1560516530216 implements MigrationInterface {

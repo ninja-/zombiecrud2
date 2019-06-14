@@ -36,8 +36,11 @@ export const expressLoader: MicroframeworkLoader = (settings: MicroframeworkSett
 
         // Run application to listen on given port
         if (!env.isTest) {
+            console.log('Listen ' + env.app.port);
             const server = expressApp.listen(env.app.port);
             settings.setData('express_server', server);
+        } else {
+            console.log('Not listen');
         }
 
         // Here we can set the data for other loaders
