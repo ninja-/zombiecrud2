@@ -141,7 +141,7 @@
           "description": "",
           "operationId": "updateZombie",
           "consumes": [
-            "application/json",
+            "application/json"
           ],
           "produces": [
             "application/json"
