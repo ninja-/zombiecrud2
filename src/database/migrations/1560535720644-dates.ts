@@ -1,3 +1,5 @@
+/* tslint:disable */
+
 import {MigrationInterface, QueryRunner} from "typeorm";
 
 export class dates1560535720644 implements MigrationInterface {

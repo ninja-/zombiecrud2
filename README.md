@@ -3,14 +3,17 @@ Zombie CRUD 2.0
 
 How to run:
 1. cp .env.example .env
-2. fill up your database details in .env and .env.test(if you want to run tests)
-3. use a seperate mysql database for .env.test
-4. yarn start setup
+2. fill up your MYSQL database details in .env
+3. yarn start setup
 
 run dev server: yarn start serve
-run api tests: NODE_ENV=test yarn run jest --testPathPattern=e2e -i
 
-(not sure what's wrong with yarn run test.e2e, but doesn't run the tests at all)
+How to run tests:
+- $ cp .env.test.example .env.test
+- fill mysql database details in .env.test
+- $ NODE_ENV=test yarn run jest --testPathPattern=e2e -i
+
+(not sure what's wrong with `yarn run test.e2e`, but doesn't run the tests at all)
 
 Api is on /api, for example GET /api/zombies
 

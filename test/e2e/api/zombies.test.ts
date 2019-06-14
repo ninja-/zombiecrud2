@@ -44,7 +44,6 @@ describe('/api/zombies', () => {
     test('GET: / should return a list of zombies', async (done) => {
         const response = await request(settings.app)
             .get('/api/zombies')
-            // .set('Authorization', `Basic ${bruceAuthorization}`)
             .expect('Content-Type', /json/)
             .expect(200);
 
@@ -64,29 +63,24 @@ describe('/api/zombies', () => {
 
         expect(response.body.id).toBe(bruce.id);
         expect(response.body.name).toBe(bruce.name);
-        // expect(response.body.lastName).toBe(bruce.lastName);
-        // expect(response.body.email).toBe(bruce.email);
         done();
     });
 
     test('POST: / should create a zombie', async (done) => {
         const response = await request(settings.app)
             .post(`/api/zombies/`)
-            .send({name: "John", items: [{id: 2}, {id: 1}]})
+            .send({name: 'John', items: [{id: 2}, {id: 1}]})
             .expect('Content-Type', /json/)
             .expect(200);
 
-        // expect(response.body.id).toBe(bruce.id);
-        expect(response.body.name).toBe("John");
-        // expect(response.body.lastName).toBe(bruce.lastName);
-        // expect(response.body.email).toBe(bruce.email);
+        expect(response.body.name).toBe('John');
         done();
     });
 
     test('DELETE: /:id should delete a zombie', async (done) => {
         const response = await request(settings.app)
             .post(`/api/zombies/`)
-            .send({name: "John Wick", id:"del", items: [{id: 2}, {id: 1}]})
+            .send({name: 'John Wick', id:'del', items: [{id: 2}, {id: 1}]})
             .expect('Content-Type', /json/)
             .expect(200);
 
@@ -110,9 +104,32 @@ describe('/api/zombies', () => {
             .expect(200);
 
         expect(list.body.length).toBe(length-1);
+        done();
     });
 
     test('PUT: /:id should update a zombie', async (done) => {
+        const response = await request(settings.app)
+            .post(`/api/zombies/`)
+            .send({name: 'John Wick 2', id:'put', items: [{id: 2}, {id: 1}]})
+            .expect('Content-Type', /json/)
+            .expect(200);
 
+        expect(response.body.name).toBe('John Wick 2');
+
+        const put = await request(settings.app)
+            .put('/api/zombies/put')
+            .send({name: 'John Wick 3', id:'put', items: [{id: 2}, {id: 1}]})
+            .expect('Content-Type', /json/)
+            .expect(200);
+
+        expect(put.body.name).toBe('John Wick 3');
+
+        const get = await request(settings.app)
+            .delete('/api/zombies/put')
+            .expect('Content-Type', /json/)
+            .expect(200);
+
+        expect(get.body.message).toBe('Zombie deleted');
+        done();
     });
 });
