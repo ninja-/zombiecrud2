@@ -2,13 +2,16 @@ import basicAuth from 'express-basic-auth';
 import { MicroframeworkLoader, MicroframeworkSettings } from 'microframework-w3tec';
 import * as path from 'path';
 import * as swaggerUi from 'swagger-ui-express';
-
+// import * as YAML from 'yamljs';
 import { env } from '../env';
 
 export const swaggerLoader: MicroframeworkLoader = (settings: MicroframeworkSettings | undefined) => {
+    console.log("swaggerLoader");
     if (settings && env.swagger.enabled) {
         const expressApp = settings.getData('express_app');
         const swaggerFile = require(path.join(__dirname, '..', env.swagger.file));
+
+        console.log("Loaded swag file");
 
         // Add npm infos to the swagger doc
         swaggerFile.info = {

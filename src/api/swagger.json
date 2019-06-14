@@ -1,626 +1,299 @@
 {
-    "openapi": "3.0.0",
-    "servers": [],
+    "swagger": "2.0",
     "info": {
-        "title": "",
-        "description": "",
-        "version": ""
+      "description": "Zombie crud",
+      "version": "1.0.0",
+      "title": "Zombie crud",
+      "termsOfService": "http://swagger.io/terms/",
+      "contact": {
+        "email": "apiteam@swagger.io"
+      },
+      "license": {
+        "name": "Apache 2.0",
+        "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+      }
     },
+    "host": "zombiestore.swagger.io",
+    "basePath": "/v2",
     "tags": [
-        {
-            "name": "Info"
-        },
-        {
-            "name": "User"
-        },
-        {
-            "name": "Pet"
+      {
+        "name": "zombie",
+        "description": "Everything about your Zombies",
+        "externalDocs": {
+          "description": "Find out more",
+          "url": "http://swagger.io"
         }
+      }
+    ],
+    "schemes": [
+      "https",
+      "http"
     ],
     "paths": {
-        "/": {
-            "get": {
-                "tags": [
-                    "Info"
-                ],
-                "summary": "Show API information",
-                "description": "This is a public route",
-                "operationId": "showApiInfo",
-                "responses": {
-                    "200": {
-                        "description": "ok"
-                    }
-                }
+      "/zombies": {
+        "post": {
+          "tags": [
+            "zombie"
+          ],
+          "summary": "Add a new zombie",
+          "description": "",
+          "operationId": "addZombie",
+          "consumes": [
+            "application/json"
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "in": "body",
+              "name": "body",
+              "description": "Zombie object that needs to be added to the store",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/Zombie"
+              }
             }
-        },
-        "/users": {
-            "get": {
-                "tags": [
-                    "User"
-                ],
-                "summary": "List all users",
-                "description": "Returns all users",
-                "operationId": "FindAllUsers",
-                "security": [
-                    {
-                        "basicAuth": []
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "ok",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "object",
-                                    "properties": {
-                                        "success": {
-                                            "type": "boolean"
-                                        },
-                                        "message": {
-                                            "type": "string"
-                                        },
-                                        "data": {
-                                            "type": "array",
-                                            "items": {
-                                                "$ref": "#/components/schemas/User"
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            },
-            "post": {
-                "tags": [
-                    "User"
-                ],
-                "summary": "Create new user",
-                "description": "",
-                "operationId": "CreateUser",
-                "security": [
-                    {
-                        "basicAuth": []
-                    }
-                ],
-                "responses": {
-                    "201": {
-                        "description": "created",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "object",
-                                    "properties": {
-                                        "success": {
-                                            "type": "boolean"
-                                        },
-                                        "message": {
-                                            "type": "string"
-                                        },
-                                        "data": {
-                                            "$ref": "#/components/schemas/User"
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                },
-                "requestBody": {
-                    "$ref": "#/components/requestBodies/NewUser"
-                }
+          ],
+          "responses": {
+            "405": {
+              "description": "Invalid input"
             }
-        },
-        "/users/{id}": {
-            "get": {
-                "tags": [
-                    "User"
-                ],
-                "summary": "Get user",
-                "description": "Returns the given user",
-                "operationId": "FindUser",
-                "security": [
-                    {
-                        "basicAuth": []
-                    }
-                ],
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "ID of user to return",
-                        "required": true,
-                        "schema": {
-                            "type": "string",
-                            "format": "uuid"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "ok",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "object",
-                                    "properties": {
-                                        "success": {
-                                            "type": "boolean"
-                                        },
-                                        "message": {
-                                            "type": "string"
-                                        },
-                                        "data": {
-                                            "$ref": "#/components/schemas/User"
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            },
-            "put": {
-                "tags": [
-                    "User"
-                ],
-                "summary": "Update user",
-                "description": "Updates the given user",
-                "operationId": "UpdateUser",
-                "security": [
-                    {
-                        "basicAuth": []
-                    }
-                ],
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "ID of user to update",
-                        "required": true,
-                        "schema": {
-                            "type": "string",
-                            "format": "uuid"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "ok",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "object",
-                                    "properties": {
-                                        "success": {
-                                            "type": "boolean"
-                                        },
-                                        "message": {
-                                            "type": "string"
-                                        },
-                                        "data": {
-                                            "$ref": "#/components/schemas/User"
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                },
-                "requestBody": {
-                    "$ref": "#/components/requestBodies/NewUser"
-                }
-            },
-            "delete": {
-                "tags": [
-                    "User"
-                ],
-                "summary": "Delete user",
-                "description": "Removes the given user",
-                "operationId": "DeleteUser",
-                "security": [
-                    {
-                        "basicAuth": []
-                    }
-                ],
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "ID of user to delete",
-                        "required": true,
-                        "schema": {
-                            "type": "string",
-                            "format": "uuid"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "ok",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "object",
-                                    "properties": {
-                                        "success": {
-                                            "type": "boolean"
-                                        },
-                                        "message": {
-                                            "type": "string"
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/pets": {
-            "get": {
-                "tags": [
-                    "Pet"
-                ],
-                "summary": "List all pets",
-                "description": "Returns all pets",
-                "operationId": "FindAllPets",
-                "security": [
-                    {
-                        "basicAuth": []
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "ok",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "object",
-                                    "properties": {
-                                        "success": {
-                                            "type": "boolean"
-                                        },
-                                        "message": {
-                                            "type": "string"
-                                        },
-                                        "data": {
-                                            "type": "array",
-                                            "items": {
-                                                "$ref": "#/components/schemas/Pet"
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            },
-            "post": {
-                "tags": [
-                    "Pet"
-                ],
-                "summary": "Create new pet",
-                "description": "",
-                "operationId": "CreatePet",
-                "security": [
-                    {
-                        "basicAuth": []
-                    }
-                ],
-                "responses": {
-                    "201": {
-                        "description": "created",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "object",
-                                    "properties": {
-                                        "success": {
-                                            "type": "boolean"
-                                        },
-                                        "message": {
-                                            "type": "string"
-                                        },
-                                        "data": {
-                                            "$ref": "#/components/schemas/Pet"
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                },
-                "requestBody": {
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/NewPet"
-                            }
-                        }
-                    },
-                    "description": "User object that needs to be added to the database",
-                    "required": true
-                }
-            }
-        },
-        "/pets/{id}": {
-            "get": {
-                "tags": [
-                    "Pet"
-                ],
-                "summary": "Get pet",
-                "description": "Returns the given pet",
-                "operationId": "FindPet",
-                "security": [
-                    {
-                        "basicAuth": []
-                    }
-                ],
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "ID of pet to return",
-                        "required": true,
-                        "schema": {
-                            "type": "string",
-                            "format": "uuid"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "ok",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "object",
-                                    "properties": {
-                                        "success": {
-                                            "type": "boolean"
-                                        },
-                                        "message": {
-                                            "type": "string"
-                                        },
-                                        "data": {
-                                            "$ref": "#/components/schemas/Pet"
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            },
-            "put": {
-                "tags": [
-                    "Pet"
-                ],
-                "summary": "Update pet",
-                "description": "Updates the given pet",
-                "operationId": "UpdatePet",
-                "security": [
-                    {
-                        "basicAuth": []
-                    }
-                ],
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "ID of pet to update",
-                        "required": true,
-                        "schema": {
-                            "type": "string",
-                            "format": "uuid"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "ok",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "object",
-                                    "properties": {
-                                        "success": {
-                                            "type": "boolean"
-                                        },
-                                        "message": {
-                                            "type": "string"
-                                        },
-                                        "data": {
-                                            "$ref": "#/components/schemas/Pet"
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                },
-                "requestBody": {
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/NewPet"
-                            }
-                        }
-                    },
-                    "description": "Pet object that needs to be added to the database",
-                    "required": true
-                }
-            },
-            "delete": {
-                "tags": [
-                    "Pet"
-                ],
-                "summary": "Delete pet",
-                "description": "Removes the given pet",
-                "operationId": "DeletePet",
-                "security": [
-                    {
-                        "basicAuth": []
-                    }
-                ],
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "ID of pet to delete",
-                        "required": true,
-                        "schema": {
-                            "type": "string",
-                            "format": "uuid"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "ok",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "object",
-                                    "properties": {
-                                        "success": {
-                                            "type": "boolean"
-                                        },
-                                        "message": {
-                                            "type": "string"
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
+          }
         }
+      },
+      "/zombies/{zombieId}": {
+        "get": {
+          "tags": [
+            "zombie"
+          ],
+          "summary": "Find zombie by ID",
+          "description": "Returns a single zombie",
+          "operationId": "getZombieById",
+          "produces": [
+            "application/xml",
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "zombieId",
+              "in": "path",
+              "description": "ID of zombie to return",
+              "required": true,
+              "type": "integer",
+              "format": "int64"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "successful operation",
+              "schema": {
+                "$ref": "#/definitions/Zombie"
+              }
+            },
+            "400": {
+              "description": "Invalid ID supplied"
+            },
+            "404": {
+              "description": "Zombie not found"
+            }
+          }
+        },
+        "post": {
+          "tags": [
+            "zombie"
+          ],
+          "summary": "Updates a zombie in the store with form data",
+          "description": "",
+          "operationId": "updateZombieWithForm",
+          "consumes": [
+            "application/x-www-form-urlencoded"
+          ],
+          "produces": [
+            "application/xml",
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "zombieId",
+              "in": "path",
+              "description": "ID of zombie that needs to be updated",
+              "required": true,
+              "type": "integer",
+              "format": "int64"
+            },
+            {
+              "name": "name",
+              "in": "formData",
+              "description": "Updated name of the zombie",
+              "required": false,
+              "type": "string"
+            },
+            {
+              "name": "status",
+              "in": "formData",
+              "description": "Updated status of the zombie",
+              "required": false,
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "405": {
+              "description": "Invalid input"
+            }
+          }
+        },
+        "delete": {
+          "tags": [
+            "zombie"
+          ],
+          "summary": "Deletes a zombie",
+          "description": "",
+          "operationId": "deleteZombie",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "api_key",
+              "in": "header",
+              "required": false,
+              "type": "string"
+            },
+            {
+              "name": "zombieId",
+              "in": "path",
+              "description": "Zombie id to delete",
+              "required": true,
+              "type": "integer",
+              "format": "int64"
+            }
+          ],
+          "responses": {
+            "400": {
+              "description": "Invalid ID supplied"
+            },
+            "404": {
+              "description": "Zombie not found"
+            }
+          }
+        },
+        "put": {
+          "tags": [
+            "zombie"
+          ],
+          "summary": "Update an existing zombie",
+          "description": "",
+          "operationId": "updateZombie",
+          "consumes": [
+            "application/json",
+            "application/xml"
+          ],
+          "produces": [
+            "application/xml",
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "in": "body",
+              "name": "body",
+              "description": "Zombie object that needs to be added to the store",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/Zombie"
+              }
+            },
+            {
+              "name": "zombieId",
+              "in": "path",
+              "description": "Zombie id to update",
+              "required": true,
+              "type": "integer",
+              "format": "int64"
+            }
+          ],
+          "responses": {
+            "400": {
+              "description": "Invalid ID supplied"
+            },
+            "404": {
+              "description": "Zombie not found"
+            },
+            "405": {
+              "description": "Validation exception"
+            }
+          }
+        }
+      }
     },
-    "components": {
-        "requestBodies": {
-            "NewUser": {
-                "content": {
-                    "application/json": {
-                        "schema": {
-                            "$ref": "#/components/schemas/NewUser"
-                        }
-                    }
-                },
-                "description": "User object that needs to be added to the database",
-                "required": true
-            }
+    "definitions": {
+      "Item": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "name": {
+            "type": "string"
+          },
+          "price": {
+            "type": "integer",
+            "format": "int64"
+          }
         },
-        "securitySchemes": {
-            "basicAuth": {
-                "type": "http",
-                "scheme": "basic"
-            }
-        },
-        "schemas": {
-            "NewUser": {
-                "type": "object",
-                "properties": {
-                    "firstName": {
-                        "type": "string"
-                    },
-                    "lastName": {
-                        "type": "string"
-                    },
-                    "username": {
-                        "type": "string"
-                    },
-                    "password": {
-                        "type": "string"
-                    },
-                    "email": {
-                        "type": "string"
-                    }
-                }
-            },
-            "NewPet": {
-                "type": "object",
-                "properties": {
-                    "name": {
-                        "type": "string"
-                    },
-                    "age": {
-                        "type": "integer",
-                        "format": "int64"
-                    },
-                    "userId": {
-                        "type": "string",
-                        "format": "uuid"
-                    }
-                }
-            },
-            "User": {
-                "title": "User",
-                "type": "object",
-                "properties": {
-                    "id": {
-                        "type": "string",
-                        "format": "uuid"
-                    },
-                    "firstName": {
-                        "type": "string"
-                    },
-                    "lastName": {
-                        "type": "string"
-                    },
-                    "username": {
-                        "type": "string"
-                    },
-                    "email": {
-                        "type": "string"
-                    },
-                    "updatedAt": {
-                        "type": "string",
-                        "format": "date-time"
-                    },
-                    "createdAt": {
-                        "type": "string",
-                        "format": "date-time"
-                    }
-                }
-            },
-            "Pet": {
-                "title": "Pet",
-                "allOf": [
-                    {
-                        "type": "object",
-                        "properties": {
-                            "id": {
-                                "type": "string",
-                                "format": "uuid"
-                            },
-                            "name": {
-                                "type": "string"
-                            },
-                            "age": {
-                                "type": "integer",
-                                "format": "int64"
-                            },
-                            "user": {
-                                "$ref": "#/components/schemas/User"
-                            },
-                            "updatedAt": {
-                                "type": "string",
-                                "format": "date-time"
-                            },
-                            "createdAt": {
-                                "type": "string",
-                                "format": "date-time"
-                            }
-                        }
-                    }
-                ]
-            }
+        "xml": {
+          "name": "Item"
         }
+      },
+      "Zombie": {
+        "type": "object",
+        "required": [
+          "name",
+          "photoUrls"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "name": {
+            "type": "string",
+            "example": "John"
+          },
+          "items": {
+            "type": "array",
+            "xml": {
+              "name": "tag",
+              "wrapped": true
+            },
+            "items": {
+              "$ref": "#/definitions/Item"
+            }
+          }
+        },
+        "xml": {
+          "name": "Zombie"
+        }
+      },
+      "ApiResponse": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "type": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "externalDocs": {
+      "description": "Find out more about Swagger",
+      "url": "http://swagger.io"
     }
-}
+  }

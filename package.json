@@ -1,7 +1,7 @@
 {
-  "name": "express-typescript-boilerplate",
+  "name": "zombicrud",
   "version": "3.2.0",
-  "description": "A delightful way to building a Node.js RESTful API Services with beautiful code written in TypeScript",
+  "description": "Zombie CRUD",
   "main": "src/app.ts",
   "scripts": {
     "start": "nps",
@@ -80,7 +80,8 @@
     "typeorm-typedi-extensions": "^0.2.1",
     "typescript": "3.0.3",
     "uuid": "^3.3.2",
-    "winston": "3.1.0"
+    "winston": "3.1.0",
+    "yamljs": "^0.3.0"
   },
   "resolutions": {
     "**/event-stream": "^4.0.1"

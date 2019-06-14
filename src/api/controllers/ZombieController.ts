@@ -38,7 +38,7 @@ export class ZombieController {
     @Delete('/:id')
     public async delete(@Param('id') id: string): Promise<any> {
         await this.zombieService.delete(id);
-        return {message: "Zombie deleted"};
+        return {message: 'Zombie deleted'};
     }
 
 }

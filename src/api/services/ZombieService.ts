@@ -22,7 +22,7 @@ export class ZombieService {
 
         // Remove itemsJSON manually
         if (Array.isArray(arg)) {
-            arg.forEach(arg => delete arg.itemsJSON);
+            arg.forEach(a => delete a.itemsJSON);
             return arg;
         }
 
