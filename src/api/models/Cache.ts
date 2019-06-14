@@ -1,5 +1,5 @@
 import { IsNotEmpty } from 'class-validator';
-import { Column, Entity, PrimaryColumn, CreateDateColumn } from 'typeorm';
+import { Column, Entity, PrimaryColumn, CreateDateColumn, BeforeInsert, BeforeUpdate, AfterLoad } from 'typeorm';
 
 @Entity()
 export class Cache {
@@ -8,7 +8,7 @@ export class Cache {
     public id: string;
 
     @IsNotEmpty()
-    @Column()
+    @Column({type: 'text'})
     public value: string;
 
     @IsNotEmpty()
@@ -18,8 +18,23 @@ export class Cache {
     @Column()
     public ttlSeconds: number;
 
+    public valueObject: any;
+
     public toString(): string {
         return `${this.id}`;
+    }
+
+    @AfterLoad()
+    public parse(): void {
+        if (this.value) {
+            this.valueObject = JSON.parse(this.value) as any;
+        }
+    }
+
+    @BeforeInsert()
+    @BeforeUpdate()
+    public stringify(): void {
+        this.value = JSON.stringify(this.valueObject);
     }
 
     public isValid(): boolean {

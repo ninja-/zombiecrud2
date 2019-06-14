@@ -19,7 +19,7 @@ export class CacheService {
     public async updateCache(key: string, data: any, ttlSeconds: number, inMemory?: boolean): Promise<void> {
         const cache = new Cache();
         cache.id = key;
-        cache.value = JSON.stringify(data);
+        cache.valueObject = data;
         cache.updated = new Date();
         cache.ttlSeconds = ttlSeconds;
 
@@ -40,6 +40,8 @@ export class CacheService {
         if (memory) {
             if (!memory.isValid()) {
                 delete this.memoryCache[id];
+            } else {
+                return memory.valueObject as T;
             }
         }
 
@@ -54,6 +56,6 @@ export class CacheService {
         }
 
         this.log.info('Returning cached for ' + id);
-        return cache.value as any as T;
+        return cache.valueObject as any as T;
     }
 }

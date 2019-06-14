@@ -33,7 +33,6 @@ export class ZombieController {
 
     @Post()
     public async create(@Body() zombie: Zombie): Promise<Zombie> {
-        console.log(zombie);
         return await this.zombieService.create(zombie);
     }
 
