@@ -1,30 +1,32 @@
-import { IsNotEmpty } from 'class-validator';
-import { Column, Entity, JoinColumn, ManyToOne, PrimaryColumn } from 'typeorm';
+// import { IsNotEmpty } from 'class-validator';
+// import { Column, Entity, JoinColumn, ManyToOne, PrimaryColumn } from 'typeorm';
 
-import { Zombie } from './Zombie';
+// import { Zombie } from './Zombie';
 
-@Entity()
+// @Entity()
 export class Item {
-    @PrimaryColumn('uuid')
-    public id: string;
+    // @PrimaryColumn('uuid')
+    public id: number;
 
-    @IsNotEmpty()
-    @Column()
+    // @IsNotEmpty()
+    // @Column()
     public name: string;
 
-    @IsNotEmpty()
-    @Column()
-    public age: number;
+    public price: number;
 
-    @Column({
-        name: 'zombie_id',
-        nullable: true,
-    })
-    public zombieId: string;
+    // @IsNotEmpty()
+    // @Column()
+    // public age: number;
 
-    @ManyToOne(type => Zombie, zombie => zombie.items)
-    @JoinColumn({ name: 'zombie_id' })
-    public zombie: Zombie;
+    // @Column({
+    //     name: 'zombie_id',
+    //     nullable: true,
+    // })
+    // public zombieId: string;
+
+    // @ManyToOne(type => Zombie, zombie => zombie.items)
+    // @JoinColumn({ name: 'zombie_id' })
+    // public zombie: Zombie;
 
     public toString(): string {
         return `${this.name}`;
