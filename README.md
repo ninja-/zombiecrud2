@@ -23,7 +23,7 @@ NOTES:
 - I know there is some boilerplate of User and Pet left; I left some(but not all) in case I needed to lookup some code patterns; also it was very heavily integrated everywhere
 - sqlite is not supported, only mysql; there are some schema issues.
 - to run tests use seperate mysql database, then your data will not be deleted
-
+- looks like dependencies fail to compile on node 12.x; stick to node 8/10
 Test results:
 ```
  PASS  test/e2e/api/zombies.test.ts (15.199s)

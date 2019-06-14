@@ -56,6 +56,12 @@
             }
           ],
           "responses": {
+            "200": {
+                "description": "successful operation",
+                "schema": {
+                  "$ref": "#/definitions/Zombie"
+                }
+              },
             "405": {
               "description": "Invalid input"
             }
@@ -71,7 +77,6 @@
           "description": "Returns a single zombie",
           "operationId": "getZombieById",
           "produces": [
-            "application/xml",
             "application/json"
           ],
           "parameters": [
@@ -111,12 +116,6 @@
           ],
           "parameters": [
             {
-              "name": "api_key",
-              "in": "header",
-              "required": false,
-              "type": "string"
-            },
-            {
               "name": "zombieId",
               "in": "path",
               "description": "Zombie id to delete",
@@ -143,10 +142,8 @@
           "operationId": "updateZombie",
           "consumes": [
             "application/json",
-            "application/xml"
           ],
           "produces": [
-            "application/xml",
             "application/json"
           ],
           "parameters": [
@@ -169,6 +166,12 @@
             }
           ],
           "responses": {
+            "200": {
+                "description": "successful operation",
+                "schema": {
+                  "$ref": "#/definitions/Zombie"
+                }
+              },
             "400": {
               "description": "Invalid ID supplied"
             },
