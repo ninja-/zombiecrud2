@@ -17,22 +17,30 @@ export class ZombieService {
         @Logger(__filename) private log: LoggerInterface
     ) { }
 
-    public find(): Promise<Zombie[]> {
-        this.log.info('Find all zombies');
-        return this.zombieRepository.find({ relations: ['items'] });
+    public cleanupZombie<T extends any>(arg: T): T {
+        // Remove itemsJSON manually
+        if (Array.isArray(arg)) {
+            arg.forEach(arg => delete arg.itemsJSON);
+            return arg;
+        }
+
+        delete arg.itemsJSON;
+        return arg;
     }
 
-    public findOne(id: string): Promise<Zombie | undefined> {
+    public async find(): Promise<Zombie[]> {
+        this.log.info('Find all zombies');
+        return this.cleanupZombie(await this.zombieRepository.find());
+    }
+
+    public async findOne(id: string): Promise<Zombie | undefined> {
         this.log.info('Find one zombie');
-        return this.zombieRepository.findOne({ id });
+        return this.cleanupZombie(await this.zombieRepository.findOne({ id }));
     }
 
     public async create(zombie: Zombie): Promise<Zombie> {
         this.log.info('Create a new zombie => ', zombie.toString());
         zombie.id = uuid.v1();
-        for (let items of zombie.items) {
-            
-        }
         const newZombie = await this.zombieRepository.save(zombie);
         // this.eventDispatcher.dispatch(events.zombie.created, newZombie);
         return newZombie;
