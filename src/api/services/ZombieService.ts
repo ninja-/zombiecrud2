@@ -29,6 +29,8 @@ export class ZombieService {
         for (const zombie of data) {
             // Refresh inventory prices
 
+            zombie.validate(); // check inventory size limits
+
             await zombie.downloadPrices(this.zombieMarketService, this.nbpService);
             await this.zombieRepository.save(zombie); // Only saves in db if prices were modified
 

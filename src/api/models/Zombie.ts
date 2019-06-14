@@ -51,6 +51,12 @@ export class Zombie {
         this.itemsJSON = JSON.stringify(this.items);
     }
 
+    public validate(): void {
+        if (this.items && this.items.length > 5) {
+            throw new Error('Zombie can have 5 items max!');
+        }
+    }
+
     public async downloadPrices(marketService: ZombieMarketService, nbp: NbpService): Promise<void> {
         const market = await marketService.getItems();
         const rates = await nbp.getExchangeRates();
