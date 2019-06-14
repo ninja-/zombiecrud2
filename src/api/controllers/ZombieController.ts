@@ -26,6 +26,7 @@ export class ZombieController {
 
     @Post()
     public create(@Body() zombie: Zombie): Promise<Zombie> {
+        console.log(zombie);
         return this.zombieService.create(zombie);
     }
 

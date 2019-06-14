@@ -30,6 +30,9 @@ export class ZombieService {
     public async create(zombie: Zombie): Promise<Zombie> {
         this.log.info('Create a new zombie => ', zombie.toString());
         zombie.id = uuid.v1();
+        for (let items of zombie.items) {
+            
+        }
         const newZombie = await this.zombieRepository.save(zombie);
         // this.eventDispatcher.dispatch(events.zombie.created, newZombie);
         return newZombie;

@@ -1,7 +1,7 @@
 import { IsNotEmpty } from 'class-validator';
-import { Column, Entity, OneToMany, PrimaryColumn } from 'typeorm';
+import { Column, Entity, PrimaryColumn } from 'typeorm';
 
-import { Item } from './Item';
+// import { Item } from './Item';
 
 @Entity()
 export class Zombie {
@@ -13,8 +13,11 @@ export class Zombie {
     @Column()
     public name: string;
 
-    @OneToMany(type => Item, item => item.zombie)
-    public items: Item[];
+    // @OneToMany(type => Item, item => item.zombie)
+    // public items: Item[];
+
+    @Column()
+    public itemsJSON: string;
 
     public toString(): string {
         return `${this.name}`;
