@@ -1,5 +1,5 @@
 import { IsNotEmpty } from 'class-validator';
-import { Column, Entity, PrimaryColumn, CreateDateColumn, BeforeInsert, BeforeUpdate, AfterLoad } from 'typeorm';
+import { Column, Entity, PrimaryColumn, BeforeInsert, BeforeUpdate, AfterLoad } from 'typeorm';
 
 @Entity()
 export class Cache {
@@ -12,7 +12,7 @@ export class Cache {
     public value: string;
 
     @IsNotEmpty()
-    @CreateDateColumn({type: 'timestamp'})
+    @Column()
     public updated: Date;
 
     @Column()

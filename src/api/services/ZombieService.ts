@@ -52,7 +52,7 @@ export class ZombieService {
 
     public async create(zombie: Zombie): Promise<Zombie> {
         this.log.info('Create a new zombie => ', zombie.toString());
-        zombie.id = uuid.v1();
+        zombie.id = zombie.id || uuid.v1();
         const newZombie = await this.zombieRepository.save(zombie);
         return await this.cleanupZombie(newZombie);
     }

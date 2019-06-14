@@ -5,7 +5,9 @@ import { env } from '../env';
 
 export const typeormLoader: MicroframeworkLoader = async (settings: MicroframeworkSettings | undefined) => {
 
+    console.log("type1");
     const loadedConnectionOptions = await getConnectionOptions();
+    console.log("type2");
 
     const connectionOptions = Object.assign(loadedConnectionOptions, {
         type: env.db.type as any, // See createConnection options for valid types
@@ -19,10 +21,14 @@ export const typeormLoader: MicroframeworkLoader = async (settings: Microframewo
         entities: env.app.dirs.entities,
         migrations: env.app.dirs.migrations,
     });
+    process.exit(1);
+    console.log("type3");
 
     const connection = await createConnection(connectionOptions);
+    console.log("type4");
 
     if (settings) {
+        console.log("db conn to", connectionOptions);
         settings.setData('connection', connection);
         settings.onShutdown(() => connection.close());
     }
