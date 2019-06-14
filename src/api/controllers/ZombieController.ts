@@ -5,17 +5,24 @@ import {
 import { ZombieNotFoundError } from '../errors/ZombieNotFoundError';
 import { Zombie } from '../models/Zombie';
 import { ZombieService } from '../services/ZombieService';
+import { NbpService } from '../services/NbpService';
 
 @JsonController('/zombies')
 export class ZombieController {
 
     constructor(
-        private zombieService: ZombieService
+        private zombieService: ZombieService,
+        private nbpService: NbpService
     ) { }
 
     @Get()
     public find(): Promise<Zombie[]> {
         return this.zombieService.find();
+    }
+
+    @Get('/debug/nbp')
+    public async nbp(): Promise<any> {
+        return this.nbpService.getExchangeRates();
     }
 
     @Get('/:id')

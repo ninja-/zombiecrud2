@@ -63,4 +63,18 @@ describe('/api/zombies', () => {
         done();
     });
 
+    test('GET: /:id should return bruce', async (done) => {
+        const response = await request(settings.app)
+            .get(`/api/zombies/${bruce.id}`)
+            // .set('Authorization', `Basic ${bruceAuthorization}`)
+            .expect('Content-Type', /json/)
+            .expect(200);
+
+        expect(response.body.id).toBe(bruce.id);
+        expect(response.body.name).toBe(bruce.name);
+        // expect(response.body.lastName).toBe(bruce.lastName);
+        // expect(response.body.email).toBe(bruce.email);
+        done();
+    });
+
 });

@@ -32,7 +32,7 @@ export class CreateBruce implements Seed {
         const user = new Zombie();
         user.id = uuid.v1();
         user.name = 'Bruce';
-        user.items = [{id: 1, name: "Some item", price: 9001}]
+        user.items = [{id: 1, name: 'Some item', price: 9001}];
         return await em.save(user);
     }
 

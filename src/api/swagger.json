@@ -99,50 +99,6 @@
             }
           }
         },
-        "post": {
-          "tags": [
-            "zombie"
-          ],
-          "summary": "Updates a zombie in the store with form data",
-          "description": "",
-          "operationId": "updateZombieWithForm",
-          "consumes": [
-            "application/x-www-form-urlencoded"
-          ],
-          "produces": [
-            "application/xml",
-            "application/json"
-          ],
-          "parameters": [
-            {
-              "name": "zombieId",
-              "in": "path",
-              "description": "ID of zombie that needs to be updated",
-              "required": true,
-              "type": "integer",
-              "format": "int64"
-            },
-            {
-              "name": "name",
-              "in": "formData",
-              "description": "Updated name of the zombie",
-              "required": false,
-              "type": "string"
-            },
-            {
-              "name": "status",
-              "in": "formData",
-              "description": "Updated status of the zombie",
-              "required": false,
-              "type": "string"
-            }
-          ],
-          "responses": {
-            "405": {
-              "description": "Invalid input"
-            }
-          }
-        },
         "delete": {
           "tags": [
             "zombie"
