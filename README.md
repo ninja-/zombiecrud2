@@ -1,6 +1,9 @@
 Zombie CRUD 2.0
 ------
 
+This was a 24h recruitment project.
+The project's goal was to demonstrate good integratiation with external API as well as some modern code patterns and libraries.
+
 How to run:
 1. $ cp .env.example .env
 2. fill up your MYSQL database details in .env
