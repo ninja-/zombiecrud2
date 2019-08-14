@@ -23,6 +23,7 @@ Api is on /api, for example GET /api/zombies
 To view the documentation SWAG go to /swag
 
 NOTES:
+-----
 - I know there is some boilerplate of User and Pet left; I left some(but not all) in case I needed to lookup some code patterns; also it was very heavily integrated everywhere
 - sqlite is not supported, only mysql; there are some schema issues.
 - to run tests use seperate mysql database, then your data will not be deleted
